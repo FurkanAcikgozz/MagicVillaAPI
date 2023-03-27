@@ -1,63 +1,46 @@
-﻿using MagicVillaAPI.Models;
+﻿using MagicVillaAPI.Data;
+using MagicVillaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MagicVillaAPI.Controllers
 {
+    //[Route("api/VillaAPI")]
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("api/VillaAPI")]
     public class VillaAPIController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Villa> GetVillas()
+        public IEnumerable<VillaDTO> GetVillas()
         {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
+            return VillaStore.villaList;
         }
 
+        [HttpGet("{id:int}")]
+        public VillaDTO GetVilla(int id)
+        {
+            return VillaStore.villaList.FirstOrDefault(u => u.Id == id);
+        }
 
-        [HttpPost]
-        public IEnumerable<Villa> GetVillas2()
-        {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
-        }
-        [HttpPut]
-        public IEnumerable<Villa> GetVillas3()
-        {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
-        }
-        [HttpPatch]
-        public IEnumerable<Villa> GetVillas4()
-        {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
-        }
-        [HttpDelete]
-        public IEnumerable<Villa> GetVillas5()
-        {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
-        }
-      
-        [Route("api/VillaAPI/del2")]
-        [HttpDelete]
-        public IEnumerable<Villa> GetVillas6()
-        {
-            return new List<Villa> {
-            new Villa{Id=1,Name="Pool View" },
-            new Villa{Id=2,Name="Beach View" }
-            };
-        }
+        //[HttpGet]
+        //public IEnumerable<VillaDTO> GetVillas()
+        //{   
+        //    return new List<VillaDTO> {
+        //    new VillaDTO{Id=1,Name="Pool View" },
+        //    new VillaDTO{Id=2,Name="Beach View" }
+        //    };
+        //}
+
+        //[HttpGet]
+        //public IEnumerable<Villa> GetVillas()
+        //{
+        //    return new List<Villa> {
+        //    new Villa{Id=1,Name="Pool View" },
+        //    new Villa{Id=2,Name="Beach View" }
+        //    };
+        //}
+
+
+
     }
 }
